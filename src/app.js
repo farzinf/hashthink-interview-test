@@ -1,8 +1,12 @@
-import express from 'express';
-const app = express();
+import loaders from './loaders';
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+export default async ({ app, config }) => {
 
-export default app;
+  await loaders({ app, config });
+  app
+    .listen(config.port, () =>
+      console.log(`Server is running on port: ${config.port}`)
+    ).on('error', () => {
+      process.exit(1);
+    });
+}
