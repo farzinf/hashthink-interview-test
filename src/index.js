@@ -1,8 +1,6 @@
-import 'dotenv/config'
-import app from './app';
+import express from 'express';
+import config from './config';
+import startApp from './app';
 
-const port = +process.env.PORT || 3000;
-
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`)
-});
+const app = express();
+startApp({ app, config }).then();
